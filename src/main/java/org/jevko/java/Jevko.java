@@ -1,41 +1,26 @@
+package org.jevko.java;
+
 import java.util.Stack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JevkoParser {
-  public class Jevko {
-    List<Subjevko> subjevkos;
-    String suffix;
+public class Jevko {
+  List<Subjevko> subjevkos;
+  String suffix;
 
-    Jevko() {
-      this.subjevkos = new ArrayList<>();
-      this.suffix = "";
-    }
-
-    @Override
-    public String toString() {
-      String ret = "";
-
-      for (var i = 0; i < this.subjevkos.size(); ++i) {
-        ret += this.subjevkos.get(i);
-      }
-      return ret + escape(this.suffix);
-    }
+  Jevko() {
+    this.subjevkos = new ArrayList<>();
+    this.suffix = "";
   }
-  
-  public class Subjevko {
-    String prefix;
-    Jevko jevko;
-  
-    Subjevko(String prefix, Jevko jevko) {
-      this.prefix = prefix;
-      this.jevko = jevko;
-    }
 
-    @Override
-    public String toString() {
-      return escape(this.prefix) + opener + this.jevko + closer;
+  @Override
+  public String toString() {
+    String ret = "";
+
+    for (var i = 0; i < this.subjevkos.size(); ++i) {
+      ret += this.subjevkos.get(i);
     }
+    return ret + escape(this.suffix);
   }
 
   static final char opener = '[';
@@ -53,8 +38,8 @@ public class JevkoParser {
     }
     return ret;
   }
-
-  public Jevko parse(String str) throws Exception {
+  
+  public static Jevko parse(String str) throws Exception {
     Stack<Jevko> ancestors = new Stack<Jevko>();
 
     Jevko parent = new Jevko();
